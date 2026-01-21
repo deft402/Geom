@@ -43,11 +43,29 @@ public class Rectangle {
         this.rectangleVertices[2][1] = y5;
         this.rectangleVertices[3][0] = x4;
         this.rectangleVertices[3][1] = y4;
-
-        new Visualization(this.rectangleVertices);
     }
 
     double[][] getVertices() {
         return this.rectangleVertices;
+    }
+
+    boolean isPointInside(int x, int y) {
+        // Для каждой стороны проверяем, что точка находится по одну сторону
+        for (int i = 0; i < 4; i++) {
+            int next = (i + 1) % 4;
+            double x1 = rectangleVertices[i][0];
+            double y1 = rectangleVertices[i][1];
+            double x2 = rectangleVertices[next][0];
+            double y2 = rectangleVertices[next][1];
+
+            // Векторное произведение (x2-x1)*(y-y1) - (y2-y1)*(x-x1)
+            double cross = (x2 - x1) * (y - y1) - (y2 - y1) * (x - x1);
+
+            // Если точка снаружи относительно этой стороны
+            if (cross < 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }

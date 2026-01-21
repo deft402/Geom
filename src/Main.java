@@ -1,6 +1,6 @@
-    import java.util.Scanner;
-    import java.io.PrintStream;
-    public class Main {
+import java.util.Scanner;
+import java.io.PrintStream;
+public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         PrintStream out = System.out;
@@ -9,8 +9,8 @@
             for(int b = 0; b < 2; b++){
                 if (a == 2 && b == 0)
                 {
-                   out.print("Введите X координату точки, лежащей на противоположной стороне: ");
-                   masT[a][b] = in.nextInt();
+                    out.print("Введите X координату точки, лежащей на противоположной стороне: ");
+                    masT[a][b] = in.nextInt();
                 }
                 if (a == 2 && b == 1)
                 {
@@ -31,7 +31,6 @@
         }
 
         Rectangle rect = new Rectangle(masT);
-
         rect.calculateVertexes();
 
         out.print("\nВведите количество точек: ");
@@ -52,6 +51,10 @@
             }
         }
 
+        IntersectionLine longest = new IntersectionLine(rect.getVertices(), masPoint);
+        double maxLength = longest.findMaxIntersection();
+        out.println("Длина наибольшего пересечения: " + maxLength);
 
+        new Visualization(rect.getVertices(), masPoint, longest.getLongestLinePoints());
     }
 }
