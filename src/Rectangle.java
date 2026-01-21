@@ -50,22 +50,18 @@ public class Rectangle {
     }
 
     boolean isPointInside(int x, int y) {
-        // Для каждой стороны проверяем, что точка находится по одну сторону
-        for (int i = 0; i < 4; i++) {
-            int next = (i + 1) % 4;
-            double x1 = rectangleVertices[i][0];
-            double y1 = rectangleVertices[i][1];
-            double x2 = rectangleVertices[next][0];
-            double y2 = rectangleVertices[next][1];
+        double minX = rectangleVertices[0][0];
+        double maxX = rectangleVertices[0][0];
+        double minY = rectangleVertices[0][1];
+        double maxY = rectangleVertices[0][1];
 
-            // Векторное произведение (x2-x1)*(y-y1) - (y2-y1)*(x-x1)
-            double cross = (x2 - x1) * (y - y1) - (y2 - y1) * (x - x1);
-
-            // Если точка снаружи относительно этой стороны
-            if (cross < 0) {
-                return false;
-            }
+        for (int i = 1; i < 4; i++) {
+            if (rectangleVertices[i][0] < minX) minX = rectangleVertices[i][0];
+            if (rectangleVertices[i][0] > maxX) maxX = rectangleVertices[i][0];
+            if (rectangleVertices[i][1] < minY) minY = rectangleVertices[i][1];
+            if (rectangleVertices[i][1] > maxY) maxY = rectangleVertices[i][1];
         }
-        return true;
+
+        return x >= minX && x <= maxX && y >= minY && y <= maxY;
     }
 }

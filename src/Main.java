@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         PrintStream out = System.out;
-        int [][] masT =  new int[3][2];
+        int [][] masT = new int[3][2];
         for(int a = 0; a < 3; a++){
             for(int b = 0; b < 2; b++){
                 if (a == 2 && b == 0)
